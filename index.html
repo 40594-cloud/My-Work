@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeHub | แนะนำอนิเมะสุดมันส์</title>
+    <title>Top 10 Must-Watch Anime</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .modal-active { overflow: hidden; }
+        .anime-card:hover img { transform: scale(1.1); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-black text-white font-sans">
 
-    <!-- Navigation -->
-    <nav class="p-6 flex justify-between items-center border-b border-gray-800">
-        <h1 class="text-2xl font-bold text-red-500 tracking-tighter">ANIME<span class="text-white">HUB</span></h1>
-        <div class="space-x-6">
-            <a href="#" class="hover:text-red-500 transition">หน้าแรก</a>
-            <a href="#" class="hover:text-red-500 transition">ยอดนิยม</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="py-16 px-6 text-center bg-gradient-to-b from-gray-800 to-gray-900">
-        <h2 class="text-4xl md:text-6xl font-extrabold mb-4">ค้นหาอนิเมะเรื่องโปรดของคุณ</h2>
-        <p class="text-gray-400 mb-8">รวมลิสต์อนิเมะที่คัดมาแล้วว่าดีที่สุดสำหรับคุณ</p>
-        <div class="max-w-md mx-auto relative">
-            <input type="text" id="searchInput" placeholder="ค้นหาชื่ออนิเมะ..." 
-                class="w-full p-4 rounded-full bg-gray-700 border-none focus:ring-2 focus:ring-red-500 text-white outline-none">
-        </div>
+    <!-- Header -->
+    <header class="py-12 px-6 text-center border-b border-gray-800 bg-gradient-to-r from-red-900 to-black">
+        <h1 class="text-5xl font-black italic tracking-tighter mb-2">TOP 10 ANIME</h1>
+        <p class="text-gray-400">10 สุดยอดอนิเมะที่ชีวิตนี้ "ต้องดู" ให้ได้สักครั้ง</p>
     </header>
 
-    <!-- Anime Grid -->
-    <main class="max-w-7xl mx-auto p-6">
-        <div id="animeGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <!-- ข้อมูลจาก JavaScript จะมาโผล่ตรงนี้ -->
+    <!-- Anime List Section -->
+    <main class="max-w-6xl mx-auto p-8">
+        <div id="animeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <!-- Cards will be injected here -->
         </div>
     </main>
 
-    <footer class="text-center p-10 border-t border-gray-800 text-gray-500">
-        <p>&copy; 2024 AnimeHub - สร้างด้วยความรัก (และโค้ด)</p>
-    </footer>
+    <!-- Full-screen Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-black z-50 hidden overflow-y-auto">
+        <button onclick="closeModal()" class="fixed top-6 right-6 text-3xl hover:text-red-500 z-[60]">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="modalContent" class="min-h-screen flex flex-col md:flex-row items-center p-8 md:p-20 gap-10">
+            <!-- Details will be injected here -->
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
