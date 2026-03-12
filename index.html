@@ -3,67 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 10 Anime</title>
+    <title>My Top 10 Anime Recommendations</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700;900&display=swap');
+        body { font-family: 'Kanit', sans-serif; }
         .modal-active { overflow: hidden; }
-        .anime-card:hover img { transform: scale(1.1); }
+        .anime-card img { transition: all 0.5s ease; }
+        .anime-card:hover img { transform: scale(1.1); filter: brightness(110%); }
     </style>
 </head>
-<body class="bg-black text-white font-sans">
+<body class="bg-black text-white">
 
-    <header class="py-12 px-6 text-center border-b border-gray-800 bg-gradient-to-r from-red-900 to-black">
-        <h1 class="text-5xl font-black italic tracking-tighter mb-2">MY TOP 10 ANIME</h1>
+    <header class="py-16 px-6 text-center border-b border-gray-800 bg-gradient-to-b from-red-900/30 to-black">
+        <h1 class="text-6xl font-black italic tracking-tighter mb-4 text-red-600">MY TOP 10</h1>
+        <p class="text-gray-400 text-lg uppercase tracking-widest">อนิเมะแนะนำที่คุณไม่ควรพลาด</p>
     </header>
 
-    <main class="max-w-6xl mx-auto p-8">
-        <div id="animeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"></div>
+    <main class="max-w-7xl mx-auto p-8">
+        <div id="animeList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            </div>
     </main>
 
-    <div id="detailModal" class="fixed inset-0 bg-black z-50 hidden overflow-y-auto">
-        <button onclick="closeModal()" class="fixed top-6 right-6 text-3xl hover:text-red-500 z-[60]"><i class="fas fa-times"></i></button>
-        <div id="modalContent" class="min-h-screen flex flex-col md:flex-row items-center p-8 md:p-20 gap-10"></div>
+    <div id="detailModal" class="fixed inset-0 bg-black/95 z-50 hidden overflow-y-auto backdrop-blur-sm">
+        <button onclick="closeModal()" class="fixed top-8 right-8 text-4xl hover:text-red-500 z-[60] transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="modalContent" class="min-h-screen flex flex-col md:flex-row items-center justify-center p-8 md:p-20 gap-12">
+            </div>
     </div>
 
     <script>
         const animeData = [
-            { id: 1, title: "Bungo Stray Dogs", rating: 8.5, img: "https://m.media-amazon.com/images/M/MV5BMjFhN2U4ZDYtZGVmYi00YjVlLWEyN2ItYjM3NGYyYmQ5ZDU2XkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg", desc: "เหล่าผู้มีพลังพิเศษไขคดีเหนือธรรมชาติในเมืองโยโกฮาม่า", genre: "Action, Supernatural" },
-            { id: 2, title: "Sakamoto Days", rating: 8.9, img: "https://m.media-amazon.com/images/M/MV5BNmU2OTY1YzAtN2JmMi00YjhkLWE3YmItOTFhMWRhYjFhYmE0XkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg", desc: "อดีตนักฆ่าในตำนานที่ผันตัวไปเปิดร้านขายของชำ", genre: "Action, Comedy" },
-            { id: 3, title: "Black Clover", rating: 8.1, img: "https://m.media-amazon.com/images/M/MV5BNTAzYTlkMWEtMmQyMi00YmU0LWI1Y2ItYmI3NTRkM2ViN2FmXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg", desc: "อัสต้า เด็กหนุ่มไร้เวทย์มุ่งสู่การเป็นจักรพรรดิเวทมนตร์", genre: "Action, Fantasy" },
-            { id: 4, title: "One Piece", rating: 8.7, img: "https://bit.ly/406XGvY", desc: "การผจญภัยตามหาสมบัติในตำนานของกลุ่มโจรสลัดหมวกฟาง", genre: "Adventure, Fantasy" },
-            { id: 5, title: "Death Note", rating: 8.6, img: "https://bit.ly/3U9i2gR", desc: "สมุดสั่งตายและการดวลสมองของอัจฉริยะสองคน", genre: "Thriller, Psychological" },
-            { id: 6, title: "Demon Slayer", rating: 8.4, img: "https://bit.ly/483ZpW8", desc: "การต่อสู้เพื่อช่วยน้องสาวและล่าอสูรด้วยปราณต่างๆ", genre: "Action, Fantasy" },
-            { id: 7, title: "Naruto", rating: 8.3, img: "https://bit.ly/3Y8Z6gB", desc: "เด็กหนุ่มผู้มีจิ้งจอกเก้าหางพยายามทำให้คนยอมรับ", genre: "Action, Ninja" },
-            { id: 8, title: "Hunter x Hunter", rating: 9.0, img: "https://bit.ly/3Y7LzC7", desc: "การผจญภัยเพื่อตามหาพ่อในโลกฮันเตอร์สุดอันตราย", genre: "Adventure" },
-            { id: 9, title: "Spy x Family", rating: 8.5, img: "https://bit.ly/3YFhN7F", desc: "ครอบครัวปลอมๆ ของสายลับ นักฆ่า และเด็กพลังจิต", genre: "Comedy" },
-            { id: 10, title: "Attack on Titan", rating: 9.1, img: "https://bit.ly/3YFhN7F", desc: "สงครามสุดท้ายของมนุษย์กับยักษ์กินคนหลังกำแพง", genre: "Action, Drama" }
+            { id: 1, title: "Bungo Stray Dogs", rating: 8.5, img: "https://m.media-amazon.com/images/M/MV5BMjFhN2U4ZDYtZGVmYi00YjVlLWEyN2ItYjM3NGYyYmQ5ZDU2XkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg", desc: "เหล่าผู้มีพลังพิเศษที่ตั้งชื่อตามนักประพันธ์ชื่อดัง ต้องไขปริศนาคดีเหนือธรรมชาติในเมืองโยโกฮาม่า", genre: "Action, Supernatural" },
+            { id: 2, title: "Sakamoto Days", rating: 8.9, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-7YVwG9R0yE6BqO7P5Y4uU3W_2-fA3B9Rg&s", desc: "อดีตนักฆ่าในตำนานที่ผันตัวไปเปิดร้านขายของชำเพื่อครอบครัว แต่โลกนักฆ่าไม่เคยปล่อยเขาไป", genre: "Action, Comedy" },
+            { id: 3, title: "Black Clover", rating: 8.1, img: "https://m.media-amazon.com/images/M/MV5BNTAzYTlkMWEtMmQyMi00YmU0LWI1Y2ItYmI3NTRkM2ViN2FmXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_.jpg", desc: "อัสต้า เด็กหนุ่มไร้เวทย์มนตร์ที่พยายามพิสูจน์ตัวเองเพื่อเป็นจักรพรรดิเวทมนตร์", genre: "Action, Fantasy" },
+            { id: 4, title: "One Piece", rating: 8.7, img: "https://m.media-amazon.com/images/M/MV5BMTNjNGU4NDgtYjYxYy00OTFlLTgxZWQtYTdlY2FmY2M3YmEwXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg", desc: "มังกี้ ดี ลูฟี่ ออกเดินทางตามหาสมบัติวันพีซเพื่อเป็นราชาโจรสลัด", genre: "Adventure, Fantasy" },
+            { id: 5, title: "Death Note", rating: 8.6, img: "https://m.media-amazon.com/images/M/MV5BNjRiNmNjMmMtN2U2Yi00ODgxLTk3OTgtMmI1MWVjZ2QyZTMwXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg", desc: "การดวลไอคิวระหว่างเด็กหนุ่มผู้มีสมุดสั่งตายกับนักสืบที่เก่งที่สุดในโลก", genre: "Psychological, Thriller" },
+            { id: 6, title: "Demon Slayer", rating: 8.4, img: "https://m.media-amazon.com/images/M/MV5BZjZjNzI5MDctY2YyZC00NmM0LWEwNTYtOGY3MzE1OTU0NmExXkEyXkFqcGdeQXVyMTA3OTEyODI1._V1_.jpg", desc: "ทันจิโร่ออกเดินทางเพื่อล้างแค้นให้อสูรและหาทางให้น้องสาวกลับเป็นมนุษย์", genre: "Action, Fantasy" },
+            { id: 7, title: "Naruto Shippuden", rating: 8.3, img: "https://m.media-amazon.com/images/M/MV5BZGExYjQzNTQtNGNhMi00MWVlLTgzOTgtM2Q1N2U5NjU0OGZkXkEyXkFqcGdeQXVyMjc2Nzg5OTQ@._V1_.jpg", desc: "เด็กหนุ่มนินจาที่ต้องการการยอมรับและก้าวสู่ตำแหน่งโฮคาเงะ", genre: "Action, Ninja" },
+            { id: 8, title: "Hunter x Hunter", rating: 9.0, img: "https://m.media-amazon.com/images/M/MV5BZjNmZjk5MzEtNDJjZC00MzQ2LWE5YTAtMzM2NTQ2NTkwY2EwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg", desc: "กอร์นออกเดินทางเพื่อเป็นฮันเตอร์ตามรอยพ่อที่หายไป", genre: "Adventure, Action" },
+            { id: 9, title: "Spy x Family", rating: 8.5, img: "https://m.media-amazon.com/images/M/MV5BOGZmNzc1ZjktZDVmMC00Y2Y0LWFkMGYtNWY1Y2VjYWIyNjY4XkEyXkFqcGdeQXVyMTA3OTEyODI1._V1_.jpg", desc: "ครอบครัวปลอมๆ ของสายลับ นักฆ่า และเด็กพลังจิตเพื่อภารกิจระดับประเทศ", genre: "Comedy, Action" },
+            { id: 10, title: "Attack on Titan", rating: 9.1, img: "https://m.media-amazon.com/images/M/MV5BNDFjYTIxMjctYTQ2ZC00OGQ4LWE3OGYtZTMzOWM3ZWIwZjk2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", desc: "มนุษย์กับยักษ์และการต่อสู้เพื่ออิสรภาพที่แลกมาด้วยความสูญเสีย", genre: "Action, Drama" }
         ];
 
         const animeList = document.getElementById('animeList');
         const modal = document.getElementById('detailModal');
         const modalContent = document.getElementById('modalContent');
 
-        animeData.forEach(anime => {
-            animeList.innerHTML += `
-                <div onclick="openModal(${anime.id})" class="anime-card cursor-pointer group bg-gray-900 rounded-lg overflow-hidden">
-                    <img src="${anime.img}" class="w-full h-72 object-cover transition duration-500">
-                    <div class="p-4">
-                        <span class="text-red-500 font-bold">#${anime.id}</span>
-                        <h3 class="font-bold text-sm truncate">${anime.title}</h3>
-                    </div>
-                </div>`;
-        });
+        function init() {
+            animeData.forEach(anime => {
+                animeList.innerHTML += `
+                    <div onclick="openModal(${anime.id})" class="anime-card cursor-pointer group bg-gray-900 rounded-2xl overflow-hidden shadow-2xl transition hover:-translate-y-2">
+                        <div class="relative h-80 overflow-hidden">
+                            <img src="${anime.img}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-red-600 text-xs font-bold px-2 py-1 rounded">RANK #${anime.id}</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-sm md:text-base truncate">${anime.title}</h3>
+                            <p class="text-yellow-400 text-xs mt-1"><i class="fas fa-star"></i> ${anime.rating}</p>
+                        </div>
+                    </div>`;
+            });
+        }
 
         function openModal(id) {
             const anime = animeData.find(a => a.id === id);
             modalContent.innerHTML = `
-                <div class="md:w-1/3"><img src="${anime.img}" class="rounded-3xl w-full shadow-2xl"></div>
-                <div class="md:w-2/3 space-y-6 text-left">
-                    <h2 class="text-5xl font-black">${anime.title}</h2>
-                    <p class="text-yellow-400 text-xl font-bold"><i class="fas fa-star"></i> ${anime.rating}</p>
-                    <p class="text-2xl text-gray-300">${anime.desc}</p>
-                    <button onclick="closeModal()" class="bg-white text-black px-8 py-3 rounded-full font-bold">BACK</button>
+                <div class="md:w-2/5 flex justify-center">
+                    <img src="${anime.img}" class="rounded-3xl shadow-2xl w-full max-w-sm border-4 border-red-600/20">
+                </div>
+                <div class="md:w-3/5 space-y-8 text-center md:text-left">
+                    <h2 class="text-5xl md:text-7xl font-black tracking-tight text-white">${anime.title}</h2>
+                    <div class="flex items-center justify-center md:justify-start gap-6">
+                        <span class="text-yellow-400 text-2xl font-bold"><i class="fas fa-star mr-2"></i>${anime.rating}</span>
+                        <span class="bg-gray-800 px-4 py-1 rounded-full text-sm font-medium border border-gray-700">${anime.genre}</span>
+                    </div>
+                    <p class="text-xl md:text-2xl text-gray-400 leading-relaxed font-light italic">"${anime.desc}"</p>
+                    <div class="pt-8">
+                        <button onclick="closeModal()" class="bg-red-600 hover:bg-red-700 text-white px-12 py-4 rounded-full font-bold text-lg shadow-lg transition transform hover:scale-105">
+                            กลับไปหน้าหลัก
+                        </button>
+                    </div>
                 </div>`;
             modal.classList.remove('hidden');
             document.body.classList.add('modal-active');
@@ -73,6 +98,8 @@
             modal.classList.add('hidden');
             document.body.classList.remove('modal-active');
         }
+
+        init();
     </script>
 </body>
 </html>
