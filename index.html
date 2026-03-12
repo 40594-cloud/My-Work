@@ -3,55 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Recommend | อนิเมะแนะนำ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>AnimeHub | แนะนำอนิเมะสุดมันส์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans">
 
-    <nav>
-        <div class="logo">AnimeList</div>
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center border-b border-gray-800">
+        <h1 class="text-2xl font-bold text-red-500 tracking-tighter">ANIME<span class="text-white">HUB</span></h1>
+        <div class="space-x-6">
+            <a href="#" class="hover:text-red-500 transition">หน้าแรก</a>
+            <a href="#" class="hover:text-red-500 transition">ยอดนิยม</a>
+        </div>
     </nav>
 
-    <header>
-        <h1>อนิเมะน่าดูปี 2026</h1>
-        <p>รวมอนิเมะสุดมันส์ที่คุณไม่ควรพลาด!</p>
+    <!-- Hero Section -->
+    <header class="py-16 px-6 text-center bg-gradient-to-b from-gray-800 to-gray-900">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-4">ค้นหาอนิเมะเรื่องโปรดของคุณ</h2>
+        <p class="text-gray-400 mb-8">รวมลิสต์อนิเมะที่คัดมาแล้วว่าดีที่สุดสำหรับคุณ</p>
+        <div class="max-w-md mx-auto relative">
+            <input type="text" id="searchInput" placeholder="ค้นหาชื่ออนิเมะ..." 
+                class="w-full p-4 rounded-full bg-gray-700 border-none focus:ring-2 focus:ring-red-500 text-white outline-none">
+        </div>
     </header>
 
-    <section class="anime-grid">
-        <!-- เรื่องที่ 1 -->
-        <div class="anime-card">
-            <img src="https://images.unsplash.com/photo-1578632292335-df3abbb0d586?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Anime 1">
-            <div class="info">
-                <h3>Solo Leveling Season 2</h3>
-                <p>การกลับมาของซองจินอู กับภารกิจที่ท้าทายกว่าเดิม!</p>
-                <span class="tag">Action / Fantasy</span>
-            </div>
+    <!-- Anime Grid -->
+    <main class="max-w-7xl mx-auto p-6">
+        <div id="animeGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- ข้อมูลจาก JavaScript จะมาโผล่ตรงนี้ -->
         </div>
+    </main>
 
-        <!-- เรื่องที่ 2 -->
-        <div class="anime-card">
-            <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Anime 2">
-            <div class="info">
-                <h3>Chainsaw Man Part 2</h3>
-                <p>การต่อสู้ครั้งใหม่ของเดนจิ และปีศาจเลื่อยยนต์</p>
-                <span class="tag">Action / Horror</span>
-            </div>
-        </div>
-
-        <!-- เรื่องที่ 3 -->
-        <div class="anime-card">
-            <img src="https://images.unsplash.com/photo-1541562232579-512a21360020?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Anime 3">
-            <div class="info">
-                <h3>Spy x Family Movie</h3>
-                <p>ความน่ารักของน้องอาเนียในภารกิจสุดป่วน</p>
-                <span class="tag">Comedy / Slice of Life</span>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>สร้างโดย [ชื่อของน้อง] | ส่งงานคุณครูวิชาคอมพิวเตอร์</p>
+    <footer class="text-center p-10 border-t border-gray-800 text-gray-500">
+        <p>&copy; 2024 AnimeHub - สร้างด้วยความรัก (และโค้ด)</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
